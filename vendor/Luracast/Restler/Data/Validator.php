@@ -130,10 +130,13 @@ class Validator implements iValidate
                 if (is_numeric($input)) return $input > 0;
                 return false;
             case 'array':
-                if (is_array($input)) {
-                    return $input;
+                if(!is_array($input)) {
+                    if(is_array($tempValue = json_decode($input, true))) {
+                        return $tempValue;
+                    }
+                    return array($input);
                 }
-                return array($input);
+                return $input;
                 break;
             case 'mixed':
             case 'unknown_type':
