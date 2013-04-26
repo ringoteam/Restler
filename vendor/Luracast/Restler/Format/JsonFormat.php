@@ -65,9 +65,9 @@ class JsonFormat extends Format
             if (self::$unEscapedSlashes) $options |= JSON_UNESCAPED_SLASHES;
             if (self::$bigIntAsString) $options |= JSON_BIGINT_AS_STRING;
             if (self::$unEscapedUnicode) $options |= JSON_UNESCAPED_UNICODE;
-            return json_encode(
+            return html_entity_decode(json_encode(
                 Util::objectToArray($data, true), $options
-            );
+            ), ENT_QUOTES);
         }
 
         $result = json_encode(Util::objectToArray($data, true));
